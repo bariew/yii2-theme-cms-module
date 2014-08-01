@@ -12,7 +12,7 @@ class Theme extends Model
 {
     const SCENARIO_CREATE = 'create';
     public static $themePath = '@app/web/themes';
-    public static $configPath = '@app/config/local.php';
+    public static $configPath = '@app/config/local/main.php';
 
     public $id;
     public $path;
