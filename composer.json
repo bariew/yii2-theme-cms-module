@@ -14,5 +14,8 @@
         "psr-4": {
             "bariew\\themeModule\\": ""
         }
+    },
+    "extra": {
+        "bootstrap": "bariew\\themeModule\\ThemeBootstrap"
     }
 }
