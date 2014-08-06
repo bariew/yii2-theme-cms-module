@@ -1,7 +1,9 @@
-<?php  
+<?php
 return [
     'menu'  => [
-        'label'    => 'Themes',
-        'url' => ['/theme/theme/index']
+        'label'    => 'Settings',
+        'items' => [
+            ['label'    => 'Themes', 'url' => ['/theme/theme/index']]
+        ]
     ]
 ];
