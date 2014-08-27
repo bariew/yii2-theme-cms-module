@@ -9,19 +9,18 @@ use yii\grid\GridView;
  * @var bariew\userModule\models\UserSearch $searchModel
  */
 
-$this->title = 'Themes';
+$this->title = Yii::t('modules/theme', 'Themes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="theme-index">
 
     <h1><?php echo Html::encode($this->title) ?></h1>
     <p>
-        <?php echo Html::a('Upload new theme', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('modules/theme', 'Upload new theme'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
         'columns' => [
             'id',
             [

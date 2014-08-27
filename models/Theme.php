@@ -42,6 +42,15 @@ class Theme extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'id'    => Yii::t('modules/theme', 'ID'),
+            'path'    => Yii::t('modules/theme', 'Path'),
+            'file'    => Yii::t('modules/theme', 'File'),
+        ];
+    }
+
     public static function listAll()
     {
         if (self::$_models !== null) {

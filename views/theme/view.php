@@ -8,8 +8,8 @@ use yii\widgets\DetailView;
  * @var bariew\userModule\models\User $model
  */
 
-$this->title = 'User #' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = Yii::t('modules/theme', 'Theme {name}', ['name' =>  $model->id]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/theme', 'Themes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <p>
-        <?php echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('modules/theme', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a(Yii::t('modules/theme', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => Yii::t('modules/theme', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

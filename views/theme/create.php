@@ -7,7 +7,7 @@ use yii\helpers\Html;
  * @var bariew\themeModule\models\Theme $model
  */
 
-$this->title = 'Create User';
+$this->title = Yii::t('modules/theme', 'Create Theme');
 $this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

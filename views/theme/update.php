@@ -7,10 +7,10 @@ use yii\helpers\Html;
  * @var bariew\themeModule\models\Theme $model
  */
 
-$this->title = 'Update Theme: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => ['index']];
+$this->title = Yii::t('modules/theme', 'Update Theme {name}', ['name' => $model->id]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/theme', 'Themes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('modules/theme', 'Update');
 ?>
 <div class="user-update">
 

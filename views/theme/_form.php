@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
     <?php echo $form->field($model, 'file')->fileInput() ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::submitButton(Yii::t('modules/theme', 'Save'), ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
