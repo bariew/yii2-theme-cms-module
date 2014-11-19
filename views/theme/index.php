@@ -33,7 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 }
             ],
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}', 'options' => ['width'=>'50px']],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'options' => ['width'=>'50px'],
+                'contentOptions' => function ($model) {
+                    return $model->id == 'null' ? ['class' => 'hide'] : [];
+                }
+            ],
         ],
     ]); ?>
 

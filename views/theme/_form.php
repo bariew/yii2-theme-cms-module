@@ -13,8 +13,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?php echo $form->field($model, 'id')->textInput(['maxlength' => 255]) ?>
-
     <?php echo $form->field($model, 'file')->fileInput() ?>
 
     <div class="form-group">

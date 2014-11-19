@@ -40,7 +40,11 @@ class ThemeController extends Controller
 
     public function actionSelect($id)
     {
-        Theme::findOne($id)->select();
+        $model = Theme::findOne($id);
+        if (!$model->getIsSelected()) {
+            $model->select();
+            $this->refresh();
+        }
         $this->redirect(['index']);
     }
 }

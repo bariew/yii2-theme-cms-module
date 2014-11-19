@@ -15,8 +15,6 @@ class Theme extends Model
     public static $configPath = '@app/config/local/main.php';
 
     public $id;
-    public $path;
-
     /**
      * @var UploadedFile
      */
@@ -35,8 +33,7 @@ class Theme extends Model
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id', 'path'], 'string'],
+            [['id'], 'string'],
             [['file'], 'required', 'on' => self::SCENARIO_CREATE],
             [['file'], 'file', 'extensions' => ['zip']],
         ];
@@ -46,7 +43,6 @@ class Theme extends Model
     {
         return [
             'id'    => Yii::t('modules/theme', 'ID'),
-            'path'    => Yii::t('modules/theme', 'Path'),
             'file'    => Yii::t('modules/theme', 'File'),
         ];
     }
@@ -95,7 +91,10 @@ class Theme extends Model
 
     public function delete()
     {
-        return FileHelper::removeDirectory($this->path);
+        return !$this->id
+            || !($path = $this->getPath())
+            || !file_exists($path)
+            || FileHelper::removeDirectory($path);
     }
 
     public function save()
@@ -103,14 +102,15 @@ class Theme extends Model
         if (!$this->validate()) {
             return false;
         }
-        $this->path = Yii::getAlias(self::$themePath . '/' . $this->id);
-        if ($this->isAttributeChanged('path')) {
-            rename($this->oldAttributes['path'], $this->path);
-        }
         if ($this->file instanceof UploadedFile) {
             return $this->extract();
         }
         return true;
+    }
+
+    public function getPath()
+    {
+        return Yii::getAlias(self::$themePath . DIRECTORY_SEPARATOR . $this->id);
     }
 
     protected function extract()
@@ -119,8 +119,22 @@ class Theme extends Model
         if ($zip->open($this->file->tempName) !== true) {
             return false;
         }
-        $zip->extractTo($this->path);
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $stat = $zip->statIndex( $i );
+            if($stat['size'] == 0 && $i == 0){
+                continue;
+            }
+            $name = trim(str_replace(DIRECTORY_SEPARATOR, ' ', $stat['name']));
+            $pathLength = count(explode(' ', $name));
+            if ($pathLength < 2) {
+                $this->addError('file', "Zip file must contain only one folder");
+                return false;
+            }
+        }
+        $this->delete();
+        $zip->extractTo(Yii::getAlias(self::$themePath));
         $zip->close();
+
         return true;
     }
 
