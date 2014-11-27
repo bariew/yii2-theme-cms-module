@@ -14,5 +14,12 @@ namespace bariew\themeModule;
  */
 class Module extends \yii\base\Module
 {
-
+    public $params = [
+        'menu'  => [
+            'label'    => 'Settings',
+            'items' => [
+                ['label'    => 'Themes', 'url' => ['/theme/theme/index']]
+            ]
+        ]
+    ];
 }
