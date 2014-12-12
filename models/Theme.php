@@ -2,6 +2,7 @@
 
 namespace bariew\themeModule\models;
 
+use app\config\ConfigManager;
 use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
@@ -12,7 +13,6 @@ class Theme extends Model
 {
     const SCENARIO_CREATE = 'create';
     public static $themePath = '@app/web/themes';
-    public static $configPath = '@app/config/local/main.php';
 
     public $id;
     /**
@@ -149,8 +149,7 @@ class Theme extends Model
     public function select()
     {
         $themePath = self::$themePath . "/{$this->id}";
-        $configPath = Yii::getAlias(self::$configPath);
-        $config = file_exists($configPath) ? require $configPath : [];
+        $config = ConfigManager::getData();
         $config['components']['view']['theme'] = [
             'pathMap' => [
                 '@app/views' => $themePath,
@@ -159,8 +158,6 @@ class Theme extends Model
             'basePath' => $themePath,
             'baseUrl' => str_replace('@app', '@web', $themePath),
         ];
-        $data = '<?php return ' . var_export($config, true) . ';';
-        file_put_contents($configPath, $data);
+        ConfigManager::put($config);
     }
-
 }
