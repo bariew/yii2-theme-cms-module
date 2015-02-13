@@ -148,15 +148,14 @@ class Theme extends Model
     public function select()
     {
         $themePath = self::$themePath . "/{$this->id}";
-        $config = \app\config\ConfigManager::getData();
-        $config['components']['view']['theme'] = [
+        $config = \app\config\ConfigManager::getWriteData();
+        \app\config\ConfigManager::set(['components','view','theme'], [
             'pathMap' => [
                 '@app/views' => $themePath,
                 '@app/modules' => $themePath,
             ],
             'basePath' => $themePath,
             'baseUrl' => str_replace('@app', '@web', $themePath),
-        ];
-        \app\config\ConfigManager::put($config);
+        ]);
     }
 }
